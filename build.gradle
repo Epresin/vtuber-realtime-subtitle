@@ -23,6 +23,7 @@ dependencies {
     implementation 'com.formdev:flatlaf-intellij-themes:3.0'
     implementation 'org.apache.commons:commons-compress:1.21'
     implementation 'com.alibaba:fastjson:2.0.22'
+    implementation 'cn.hutool:hutool-all:5.8.11'
 
 
     compileOnly 'org.projectlombok:lombok:1.18.24'

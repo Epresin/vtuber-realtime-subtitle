@@ -17,7 +17,7 @@ public class Recognition implements Runnable {
     public Recognition() throws IOException {
     }
 
-    private static SpeechClient getSpeechClient() throws IOException {
+    private SpeechClient getSpeechClient() throws IOException {
         //从配置文件读取密钥（可自行修改）
         Properties props = new Properties();
         //从配置文件读取密钥
@@ -28,7 +28,7 @@ public class Recognition implements Runnable {
         return SpeechClient.newInstance(appId, secretId, secretKey);
     }
 
-    private static SpeechRecognizer getSpeechRecognizer() throws IOException {
+    private SpeechRecognizer getSpeechRecognizer() throws IOException {
         SpeechRecognitionRequest request = SpeechRecognitionRequest.initialize();
         request.setEngineModelType("16k_zh"); //指定模型类型
         request.setVoiceFormat(1);  //指定音频格式
@@ -36,19 +36,15 @@ public class Recognition implements Runnable {
         return speechClient.newSpeechRecognizer(request, RecognitionListener.getRecognitionListener());
     }
 
-    private static final SpeechRecognizer speechWsRecognizer;
 
-
-    static {
+    @Override
+    public void run() {
+        SpeechRecognizer speechWsRecognizer = null;
         try {
             speechWsRecognizer = getSpeechRecognizer();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public void run() {
         speechWsRecognizer.start();
         try {
             Recording.start();

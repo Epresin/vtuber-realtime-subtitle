@@ -1,5 +1,6 @@
 package cn.mccts.vrts.gui;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.mccts.vrts.main.Main;
 import cn.mccts.vrts.recognition.tencent.Recognition;
 import lombok.Setter;
@@ -78,14 +79,12 @@ public class TestGUI {
                 super.mouseClicked(e);
                 if (!Main.status) {
                     Main.status = true;
-                    Runnable recognition;
                     try {
-                        recognition = new Recognition();
+                        Recognition recognition=new Recognition();
+                        ThreadUtil.execAsync(recognition);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Thread thread=new Thread(recognition);
-                    thread.start();
                 }
             }
         });

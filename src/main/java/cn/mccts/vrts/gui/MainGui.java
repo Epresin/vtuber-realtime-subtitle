@@ -1,5 +1,6 @@
 package cn.mccts.vrts.gui;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.mccts.vrts.recognition.tencent.Recognition;
 import com.tencent.SpeechClient;
 import lombok.Setter;
@@ -27,14 +28,6 @@ public class MainGui {
         startButton.addActionListener(e -> {
             if (!status) {
                 status = true;
-                Runnable recognition;
-                try {
-                    recognition = new Recognition();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                Thread thread=new Thread(recognition);
-                thread.start();
             }
         });
         stopButton.addActionListener(e -> {
