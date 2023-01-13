@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'cn.mccts'
+version '1.0-SNAPSHOT'
+description 'vtuber-real-time-subtitle'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation 'org.slf4j:slf4j-api:2.0.6'
+    implementation 'com.tencentcloudapi:tencentcloud-speech-sdk-java:1.0.22'
+    implementation 'ch.qos.logback:logback-core:1.4.5'
+    implementation 'ch.qos.logback:logback-access:1.4.5'
+    implementation 'ch.qos.logback:logback-classic:1.4.5'
+    implementation 'com.formdev:flatlaf:3.0'
+    implementation 'com.formdev:flatlaf-intellij-themes:3.0'
+    implementation 'org.apache.commons:commons-compress:1.21'
+    implementation 'com.alibaba:fastjson:2.0.22'
+
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
+
+test {
+    useJUnitPlatform()
+}
