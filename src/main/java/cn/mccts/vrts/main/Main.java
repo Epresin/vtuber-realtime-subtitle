@@ -1,17 +1,10 @@
 package cn.mccts.vrts.main;
 
-import cn.hutool.core.thread.ThreadUtil;
-import cn.mccts.vrts.gui.JsonAnalysis;
-import cn.mccts.vrts.gui.MainGui;
-import cn.mccts.vrts.gui.TestGUI;
-import cn.mccts.vrts.recognition.tencent.Recognition;
+import cn.mccts.vrts.gui.MainGUI;
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
-import java.io.IOException;
-
 
 
 @Slf4j
@@ -19,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         initGUIStyle();
-        TestGUI.init();
+        MainGUI.init();
 
     }
     public static boolean status = false;//记录系统状态

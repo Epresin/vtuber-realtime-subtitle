@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
-public class TestGUI {
+public class MainGUI {
 
     static Point origin = new Point();  //全局的位置变量，用于表示鼠标在窗口上的位置
 

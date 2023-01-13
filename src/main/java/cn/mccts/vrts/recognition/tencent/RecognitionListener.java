@@ -1,17 +1,13 @@
 package cn.mccts.vrts.recognition.tencent;
 
-import cn.mccts.vrts.gui.JsonAnalysis;
-import cn.mccts.vrts.gui.MainGui;
-import cn.mccts.vrts.gui.TestGUI;
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
+import cn.mccts.vrts.data.JSONAnalysis;
+import cn.mccts.vrts.gui.MainGUI;
+import cn.mccts.vrts.main.Main;
 import com.tencent.asr.model.SpeechRecognitionResponse;
 import com.tencent.asr.service.SpeechRecognitionListener;
 import com.tencent.core.utils.JsonUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Slf4j
 public class RecognitionListener extends SpeechRecognitionListener {
@@ -60,6 +56,6 @@ public class RecognitionListener extends SpeechRecognitionListener {
     @Override
     public void onMessage(SpeechRecognitionResponse response) {
         log.info("识别结果:" + JsonUtil.toJson(response));
-        TestGUI.repaint(JsonAnalysis.getResult(JsonUtil.toJson(response)));
+        MainGUI.repaint(JSONAnalysis.getResult(JsonUtil.toJson(response)));
     }
 }

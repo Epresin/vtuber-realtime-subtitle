@@ -1,6 +1,5 @@
 package cn.mccts.vrts.recognition.tencent;
 
-import cn.mccts.vrts.gui.MainGui;
 import cn.mccts.vrts.main.Main;
 import cn.mccts.vrts.record.Recording;
 import com.tencent.SpeechClient;
