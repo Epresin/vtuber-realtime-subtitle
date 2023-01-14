@@ -25,8 +25,8 @@ public class MainGUI {
 
     public static void init() {
         frame.setUndecorated(true);
-        frame.setBackground(new Color(0, 0, 0, 50));
-        frame.setSize(900, 100);
+        frame.setBackground(new Color(0, 0, 0, 60));
+        frame.setBounds(300, 500, 900, 100);
         frame.setLayout(null);
 
         subtitle.setBackground(new Color(0, 0, 0, 0));
@@ -35,11 +35,11 @@ public class MainGUI {
         closeButton.setBackground(new Color(0, 0, 0, 30));
         closeButton.setBounds(884, 0, 16, 16);
 
-        startButton.setBackground(new Color(0,100,0,30));
-        startButton.setBounds(884,16,16,42);
+        startButton.setBackground(new Color(0, 100, 0, 30));
+        startButton.setBounds(884, 16, 16, 42);
 
-        stopButton.setBackground(new Color(100,0,0,30));
-        stopButton.setBounds(884,58,16,42);
+        stopButton.setBackground(new Color(100, 0, 0, 30));
+        stopButton.setBounds(884, 58, 16, 42);
 
 
         frame.add(subtitle);
@@ -50,17 +50,15 @@ public class MainGUI {
         frame.setVisible(true);
 
         frame.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {  //按下（mousePressed 不是点击，而是鼠标被按下没有抬起）
-                origin.x = e.getX();  //当鼠标按下的时候获得窗口当前的位置
+            public void mousePressed(MouseEvent e) {
+                origin.x = e.getX();
                 origin.y = e.getY();
             }
         });
         frame.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent e) {  //拖动（mouseDragged 指的不是鼠标在窗口中移动，而是用鼠标拖动）
+            public void mouseDragged(MouseEvent e) {
 
-                Point p = frame.getLocation();  //当鼠标拖动时获取窗口当前位置
-                //设置窗口的位置
-                //窗口当前的位置 + 鼠标当前在窗口的位置 - 鼠标按下的时候在窗口的位置
+                Point p = frame.getLocation();
                 frame.setLocation(p.x + e.getX() - origin.x, p.y + e.getY() - origin.y);
             }
         });
@@ -70,7 +68,18 @@ public class MainGUI {
                 super.mouseClicked(e);
                 frame.setVisible(false);
                 System.exit(0);
-
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                closeButton.addShadow();
+                frame.repaint();
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                closeButton.removeShadow();
+                frame.repaint();
             }
         });
         startButton.addMouseListener(new MouseAdapter() {
@@ -80,21 +89,45 @@ public class MainGUI {
                 if (!Main.status) {
                     Main.status = true;
                     try {
-                        Recognition recognition=new Recognition();
+                        Recognition recognition = new Recognition();
                         ThreadUtil.execAsync(recognition);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
             }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                startButton.addShadow();
+                frame.repaint();
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                startButton.removeShadow();
+                frame.repaint();
+            }
         });
         stopButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (Main.status){
-                   Main.status=false;
+                if (Main.status) {
+                    Main.status = false;
                 }
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                stopButton.addShadow();
+                frame.repaint();
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                stopButton.removeShadow();
+                frame.repaint();
             }
         });
 
@@ -117,7 +150,30 @@ public class MainGUI {
     }
 
     static class PanelButton extends JPanel {
+        private void addShadow() {
+            Color color = getBackground();
+            int red = color.getRed();
+            int green = color.getGreen();
+            int blue = color.getBlue();
+            int alpha = color.getAlpha();
+            alpha = alpha + 30;
+            Color newColor = new Color(red, green, blue, alpha);
+            setBackground(newColor);
+            repaint();
+        }
+        private void removeShadow() {
+            Color color = getBackground();
+            int red = color.getRed();
+            int green = color.getGreen();
+            int blue = color.getBlue();
+            int alpha = color.getAlpha();
+            alpha = alpha - 30;
+            Color newColor = new Color(red, green, blue, alpha);
+            setBackground(newColor);
+            repaint();
+        }
     }
+
     public static void repaint(String text) {
         subtitle.setText(text);
         subtitle.repaint();
